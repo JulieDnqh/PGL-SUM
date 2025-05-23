@@ -103,7 +103,8 @@ class SelfAttention(nn.Module):
 
             # Q *= 0.06                       # scale factor VASNet
             # Q /= np.sqrt(self.output_size)  # scale factor (i.e 1 / sqrt(d_k) )
-            energies = torch.matmul(Q, K.transpose(1, 0))
+            # energies = torch.matmul(Q, K.transpose(1, 0))
+            energies = torch.matmul(Q, K.transpose(1, 2))
             if self.pos_enc is not None:
                 if self.pos_enc == "absolute":
                     AP = self.getAbsolutePosition(T=energies.shape[0])
